@@ -1,5 +1,21 @@
 {
-    "require": {
+    "name" : "r3m-io/priya",
+    "description" : "R3m-io/priya see https://r3m.io for detailed usage",
+    "type" : "library",
+    "keywords" : ["javascript", "priya", "r3m", "library"],
+    "homepage": "https://r3m.io",
+    "require" : {
         "r3m/framework": "dev-dev"
+    },
+    "license" : "MIT",
+    "authors" : [{
+        "name" : "Remco van der Velde",
+        "email" : "remco@universeorange.com"
+    }
+    ],
+    "autoload" : {
+        "psr-4" : {
+            "R3m\\Io\\Priya\\" : "src/"
+        }
     }
 }
