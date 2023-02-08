@@ -14,6 +14,7 @@ use R3m\Io\Exception\UrlEmptyException;
 use R3m\Io\Exception\UrlNotExistException;
 
 class Cli extends Controller {
+    const DIR = __DIR__ . '/';
     const MODULE_INFO = 'Info';
 
     static public function run(App $object){
