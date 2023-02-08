@@ -1,7 +1,7 @@
 {
   "r3m-io-priya": {
     "path": "r3m-io/priya/",
-    "controller": "R3m.Io.Priya.Cli.run",
+    "controller": "R3m.Io.Priya.Controller.Cli.run",
     "language": "en",
     "method": [
       "CLI"
