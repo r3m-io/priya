@@ -22,11 +22,11 @@ class Cli extends Controller {
         ddd($priya);
 
         $scan = Cli::scan($object);
-        $module = $object->parameter($object, 'configure', 1);
+        $module = $object->parameter($object, $priya, 1);
         if(!in_array($module, $scan['module'])){
             $module = Cli::MODULE_INFO;
         }
-        $submodule = $object->parameter($object, 'configure', 2);
+        $submodule = $object->parameter($object, $priya, 2);
         if(
             !in_array(
                 $submodule,
@@ -39,7 +39,7 @@ class Cli extends Controller {
                 $submodule = Cli::MODULE_INFO;
             }
         }
-        $command = $object->parameter($object, 'configure', 3);
+        $command = $object->parameter($object, $priya, 3);
         if(
             !in_array(
                 $command,
@@ -50,7 +50,7 @@ class Cli extends Controller {
         ){
             $command = false;
         }
-        $subcommand = $object->parameter($object, 'configure', 3);
+        $subcommand = $object->parameter($object, $priya, 4);
         if(
             !in_array(
                 $subcommand,
