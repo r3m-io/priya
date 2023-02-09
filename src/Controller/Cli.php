@@ -31,11 +31,7 @@ class Cli extends Controller {
                 $scan['submodule']
             )
         ){
-            if($module === Cli::MODULE_INFO){
-                $submodule = false;
-            } else {
-                $submodule = Cli::MODULE_INFO;
-            }
+            $submodule = false;
         }
         $command = $object->parameter($object, $priya, 3);
         if(
