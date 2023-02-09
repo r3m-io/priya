@@ -19,9 +19,6 @@ class Cli extends Controller {
 
     static public function run(App $object){
         $priya = $object->request(0);
-        $test = $object->request(1);
-        echo $priya . PHP_EOL;
-        echo $test . PHP_EOL;
         $scan = Cli::scan($object);
         $module = $object->parameter($object, $priya, 1);
         if(!in_array($module, $scan['module'])){
