@@ -19,8 +19,6 @@ class Cli extends Controller {
 
     static public function run(App $object){
         $priya = $object->request('0');
-        ddd($priya);
-
         $scan = Cli::scan($object);
         $module = $object->parameter($object, $priya, 1);
         if(!in_array($module, $scan['module'])){
