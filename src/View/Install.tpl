@@ -1,5 +1,5 @@
-{{$url = parameter('install', 1)}}
+{{$key = request(0)}}
 
 Installation.
 
-{{$url}}
+{{$key}}
