@@ -39,7 +39,6 @@ class Cli extends Controller {
                         $autoload = $object->data(App::AUTOLOAD_R3M);
                         $addPrefix  = Core::object($record, Core::OBJECT_ARRAY);
                         $addPrefix = Config::parameters($object, $addPrefix);
-                        ddd($addPrefix);
                         $autoload->addPrefix($addPrefix['prefix'], $addPrefix['directory']);
                     }
                 }
