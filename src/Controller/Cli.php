@@ -27,7 +27,6 @@ class Cli extends Controller {
      */
     static public function run(App $object){
         $url = $object->config('controller.dir.data') . 'Config' . $object->config('extension.json');
-        ddd($url);
         $read = $object->data_read($url);
         if($read){
             $list = $read->get('autoload');
