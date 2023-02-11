@@ -21,8 +21,7 @@ Trait Installation {
             $dir_priya = Dir::name(__DIR__, 2);
             $data->set('installation.date', date('Y-m-d H:i:s+00:00'));
             $data->set('installation.directory', $dir_priya);
-            $key = $object->config('parse.read.object.this.prefix') . $object->config('parse.read.object.this.key');
-            $data->set('installation.package', $package->{$key});
+            $data->set('installation.package', $package->name);
             $dir = new Dir();
             $read = $dir->read($dir_priya, true);
             $fileList = [];

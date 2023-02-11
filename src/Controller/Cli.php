@@ -21,11 +21,12 @@ class Cli extends Controller {
     const DIR = __DIR__ . '/';
     const MODULE_INFO = 'Info';
 
+
     /**
      * @throws ObjectException
      * @throws Exception
      */
-    static public function run(App $object){
+    private static function autoload(App $object){
         $url = $object->config('controller.dir.data') . 'Config' . $object->config('extension.json');
         $read = $object->data_read($url);
         if($read){
@@ -44,6 +45,14 @@ class Cli extends Controller {
                 }
             }
         }
+    }
+
+    /**
+     * @throws ObjectException
+     * @throws Exception
+     */
+    public static function run(App $object){
+        Cli::autoload($object);
         $priya = $object->request(0);
         $scan = Cli::scan($object);
         $module = $object->parameter($object, $priya, 1);
