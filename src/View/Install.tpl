@@ -2,4 +2,5 @@
 {{$url = config('framework.dir.data') + config('dictionary.package') + config('extension.json')}}
 {{$package = object.select($url, 'package.' + $key, true, 'item')}}
 Installation.
+
 {{dd($package)}}

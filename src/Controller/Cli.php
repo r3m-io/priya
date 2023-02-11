@@ -18,6 +18,7 @@ class Cli extends Controller {
     const MODULE_INFO = 'Info';
 
     static public function run(App $object){
+        ddd($object->config('controller'));
         $priya = $object->request(0);
         $scan = Cli::scan($object);
         $module = $object->parameter($object, $priya, 1);
