@@ -25,7 +25,7 @@ class Cli extends Controller {
      * @throws ObjectException
      */
     static public function run(App $object){
-        $url = $object->config('controller.dir.data') . $object->config('dictionary.config') . $object->config('extension.json');
+        $url = $object->config('controller.dir.data') . 'Config' . $object->config('extension.json');
         ddd($url);
         $read = $object->data_read($url);
         if($read){
