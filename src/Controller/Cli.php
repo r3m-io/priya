@@ -10,6 +10,7 @@ use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
 
 use R3m\Io\Exception\LocateException;
+use R3m\Io\Exception\ObjectException;
 use R3m\Io\Exception\UrlEmptyException;
 use R3m\Io\Exception\UrlNotExistException;
 
@@ -17,8 +18,26 @@ class Cli extends Controller {
     const DIR = __DIR__ . '/';
     const MODULE_INFO = 'Info';
 
+    /**
+     * @throws ObjectException
+     */
     static public function run(App $object){
-        ddd($object->config('controller'));
+        $url = $object->config('controller.dir.data') . $object->config('dictionary.config') . $object->config('extension.json');
+        $read = $object->data_read($url);
+        if($read){
+            $list = $read->get('autoload');
+            if($list && is_array($list)){
+                foreach($list as $record){
+                    if(
+                        property_exists($record, 'prefix') &&
+                        property_exists($record, 'directory')
+                    ){
+                        $autoload = $object->data(App::AUTOLOAD_R3M);
+                        $autoload->addPrefix($record->prefix, $record->directory);
+                    }
+                }
+            }
+        }
         $priya = $object->request(0);
         $scan = Cli::scan($object);
         $module = $object->parameter($object, $priya, 1);

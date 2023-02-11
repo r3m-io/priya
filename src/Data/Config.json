@@ -1,0 +1,8 @@
+{
+  "autoload" : [
+    {
+      "prefix" : "Priya",
+      "directory" : "{{config('controller.dir.root')}}Trait{{config('ds')}}"
+    }
+  ]
+}
