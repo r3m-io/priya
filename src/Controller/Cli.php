@@ -2,12 +2,15 @@
 
 namespace R3m\Io\Priya\Controller;
 
-use Exception;
 use R3m\Io\App;
+use R3m\Io\Config;
 
+use R3m\Io\Module\Core;
 use R3m\Io\Module\Controller;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
+
+use Exception;
 
 use R3m\Io\Exception\LocateException;
 use R3m\Io\Exception\ObjectException;
@@ -33,7 +36,13 @@ class Cli extends Controller {
                         property_exists($record, 'directory')
                     ){
                         $autoload = $object->data(App::AUTOLOAD_R3M);
-                        $autoload->addPrefix($record->prefix, $record->directory);
+
+                        $addPrefix  = Core::object_array($record);
+                        $addPrefix = Config::parameters($object, $addPrefix);
+
+
+
+                        $autoload->addPrefix($addPrefix['prefix'], $addPrefix['directory']);
                     }
                 }
             }

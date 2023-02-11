@@ -3,6 +3,6 @@
 {{$package = object.select($url, 'package.' + $key, true, 'item')}}
 Installation.
 
-{{priya:installation:prepare($package)}}
+{{Priya:Installation:prepare($package)}}
 
 {{dd($package)}}
