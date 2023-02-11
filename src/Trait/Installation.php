@@ -13,14 +13,30 @@ Trait Installation {
             $url = $package->installation;
             $dir = Dir::name($url);
             Dir::create($dir, Dir::CHMOD);
+            $object = $this->object();
+            $data = $object->data_read($url);
+            if(!$data){
+                $data = new Data();
+            }
+            $dir_priya = Dir::name(__DIR__, 2);
+            $data->set('installation.date', date('Y-m-d H:i:s+0:00'));
+            $data->set('installation.directory', $dir_priya);
+            $key = $object->config('parse.read.object.this.prefix') . $object->config('parse.read.object.this.key');
+            $data->set('installation.package', $package->{$key});
+            $dir = new Dir();
+            $read = $dir->read($dir_priya, true);
+            $fileList = [];
+            $dirList = [];
+            foreach($read as $file){
+                if($file->type === Dir::TYPE){
+                    $dirList[] = $file;
+                } else {
+                    $fileList[] = $file;
+                }
+            }
+            $data->set('installation.dir', $dirList);
+            $data->set('installation.file', $fileList);
+            $data->write($url);
         }
-        $object = $this->object();
-        $data = $object->data_read($url);
-        if(!$data){
-            $data = new Data();
-        }
-        $root = Dir::name(__DIR__, 2);
-        d($root);
-        ddd($package);
     }
 }
