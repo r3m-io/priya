@@ -23,6 +23,7 @@ class Cli extends Controller {
 
     /**
      * @throws ObjectException
+     * @throws Exception
      */
     static public function run(App $object){
         $url = $object->config('controller.dir.data') . 'Config' . $object->config('extension.json');
@@ -37,12 +38,8 @@ class Cli extends Controller {
                         property_exists($record, 'directory')
                     ){
                         $autoload = $object->data(App::AUTOLOAD_R3M);
-
-                        $addPrefix  = Core::object_array($record);
+                        $addPrefix  = Core::object($record, Core::OBJECT_ARRAY);
                         $addPrefix = Config::parameters($object, $addPrefix);
-
-
-
                         $autoload->addPrefix($addPrefix['prefix'], $addPrefix['directory']);
                     }
                 }
