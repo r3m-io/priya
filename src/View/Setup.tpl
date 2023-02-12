@@ -4,5 +4,5 @@
 {{$package = object.select($url, 'package.' + $key, true, 'item')}}
 Setup {{$key}}:
 
-{{$setup.continue = terminal.readline('This will setup ' + $key + '. Are you sure you want to continue (y/n)')}}
+{{$setup[] = terminal.readline('This will setup ' + $key + '. Are you sure you want to continue y/n')}}
 {{dd('{{$this}}')}}
