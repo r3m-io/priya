@@ -8,7 +8,7 @@ use stdClass;
 
 Trait Installation {
 
-    public function prepare(stdClass $package=null){
+    public function register(stdClass $package=null){
         if(property_exists($package, 'installation')){
             $url = $package->installation;
             $dir = Dir::name($url);
