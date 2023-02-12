@@ -6,6 +6,6 @@ Setup {{$key}}:
 {{$info = 'This will setup ' + $key + '. Are you sure you want to continue (y/n): '}}
 {{$setup = []}}
 {{$setup[][$key]['info2'+ '34.5'] = terminal.readline($info)}}
-{{$setup[][$key|default:"term"][] = terminal.readline($info)}}
+{{$setup[4][$key|default:"term"][] = terminal.readline($info)}}
 {{$setup[][$key][] = terminal.readline($info)}}
 {{dd('{{$this}}')}}
