@@ -41,6 +41,9 @@ class Cli extends Controller {
                         $addPrefix  = Core::object($record, Core::OBJECT_ARRAY);
                         $addPrefix = Config::parameters($object, $addPrefix);
                         $autoload->addPrefix($addPrefix['prefix'], $addPrefix['directory']);
+                        if($object->config('project.log.name')){
+                            $object->logger($object->config('project.log.name'))->info('New namespace: ' . $addPrefix['prefix'], [ $addPrefix ]);
+                        }
                     }
                 }
             }
