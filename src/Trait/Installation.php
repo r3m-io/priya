@@ -35,7 +35,7 @@ Trait Installation {
                 }
             }
             $dirList = Sort::list($dirList)->with(["url" => "ASC"], true);
-            ddd($dirList);
+            $fileList = Sort::list($dirList)->with(["url" => "ASC"], true);
             $data->set('installation.dir', $dirList);
             $data->set('installation.file', $fileList);
             $data->write($url);

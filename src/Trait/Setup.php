@@ -8,5 +8,5 @@ use R3m\Io\Module\Sort;
 use stdClass;
 
 Trait Setup {
-    
+
 }
