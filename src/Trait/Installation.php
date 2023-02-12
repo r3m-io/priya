@@ -4,6 +4,7 @@ namespace Priya;
 
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
+use R3m\Io\Module\Sort;
 use stdClass;
 
 Trait Installation {
@@ -33,6 +34,8 @@ Trait Installation {
                     $fileList[] = $file;
                 }
             }
+            $dirList = Sort::list($dirList)->with(["url" => "ASC"], true);
+            ddd($dirList);
             $data->set('installation.dir', $dirList);
             $data->set('installation.file', $fileList);
             $data->write($url);
