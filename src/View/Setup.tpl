@@ -1,6 +1,12 @@
 {{R3M}}
-{{$from = terminal.readline('stream')}}
-{{dd($from)}}
+{{$stream = terminal.readline('stream')}}
+{{if(!is.empty($stream.server.config))}}
+{{config($stream.server.config)}}
+{{/if}}
+{{if(!is.empty($stream.server.route))}}
+{{route.data($stream.server.route)}}
+{{/if}}
+{{dd($stream)}}
 
 
 {{$key = request(0)}}
