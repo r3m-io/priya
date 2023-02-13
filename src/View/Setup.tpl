@@ -1,7 +1,7 @@
 {{R3M}}
 {{$options = options()}}
 
-{{if(!is.empty($options['stream']))}}
+{{if(!is.empty($options.stream))}}
 {{$stream = terminal.readline('stream')}}
 {{if(!is.empty($stream.server.config))}}
 {{$config = config($stream.server.config)}}
