@@ -1,5 +1,5 @@
 {{R3M}}
-{{$from = terminal.readline()}}
+{{$from = terminal.readline('stream')}}
 {{dd($from)}}
 
 
