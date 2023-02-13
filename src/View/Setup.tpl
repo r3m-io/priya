@@ -1,4 +1,8 @@
 {{R3M}}
+{{$from = terminal.readline()}}
+{{dd($from)}}
+
+
 {{$key = request(0)}}
 {{$url = config('framework.dir.data') + config('dictionary.package') + config('extension.json')}}
 {{$package = object.select($url, 'package.' + $key, true, 'scope:object')}}
