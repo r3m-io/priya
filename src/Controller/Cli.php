@@ -136,7 +136,7 @@ class Cli extends Controller {
                     ucfirst($module)
                 );
             }
-            return Cli::response($object, $url);
+            return Cli:: response($object, $url);
         } catch (Exception | UrlEmptyException | UrlNotExistException | LocateException $exception){
             return $exception;
         }

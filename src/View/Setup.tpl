@@ -3,11 +3,13 @@
 {{if(!is.empty($stream.server.config))}}
 {{config($stream.server.config)}}
 {{/if}}
+/*
 {{if(!is.empty($stream.server.route))}}
 {{dd('yes')}}
 {{route.data($stream.server.route)}}
 {{/if}}
 {{dd('no')}}
+*/
 /*
 {{$key = request(0)}}
 {{$url = config('framework.dir.data') + config('dictionary.package') + config('extension.json')}}
