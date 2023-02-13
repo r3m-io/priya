@@ -1,5 +1,6 @@
 {{R3M}}
-{{if(!is.empty($stream.server.config.is.stream))}}
+{{$options = options()}}
+{{if(in.array('stream', $options))}}
 {{$stream = terminal.readline('stream')}}
 {{if(!is.empty($stream.server.config))}}
 {{$config = config($stream.server.config)}}
@@ -11,3 +12,5 @@ is stream
 {{else}}
 is no stream
 {{/if}}
+{{/if}}
+
