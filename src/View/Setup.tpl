@@ -6,6 +6,7 @@
 {{if(!is.empty($stream.server.route))}}
 {{route.data($stream.server.route)}}
 {{/if}}
+{{dd('{{$this}}')}}
 {{dd($stream)}}
 
 
