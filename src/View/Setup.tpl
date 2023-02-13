@@ -4,10 +4,10 @@
 {{config($stream.server.config)}}
 {{/if}}
 {{if(!is.empty($stream.server.route))}}
+{{dd('yes')}}
 {{route.data($stream.server.route)}}
 {{/if}}
-{{dd('{{$this}}')}}
-{{dd($stream)}}
+
 
 
 {{$key = request(0)}}
