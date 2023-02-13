@@ -4,7 +4,6 @@
 {{$config = config($stream.server.config)}}
 {{/if}}
 {{if(!is.empty($stream.server.route))}}
-{{dd('yes')}}
 {{$route = route.data($stream.server.route)}}
 {{/if}}
 {{dd('no')}}
