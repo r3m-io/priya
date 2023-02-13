@@ -1,5 +1,6 @@
 {{R3M}}
 {{$stream = terminal.readline('stream')}}
+{{dd($stream)}}
 {{if(!is.empty($stream.server.config))}}
 {{config($stream.server.config)}}
 {{/if}}
