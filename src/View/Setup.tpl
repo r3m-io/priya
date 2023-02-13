@@ -8,4 +8,6 @@
 {{$route = route.data($stream.server.route)}}
 {{/if}}
 is stream
+{{else}}
+is no stream
 {{/if}}
