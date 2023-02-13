@@ -1,11 +1,7 @@
 {{R3M}}
 {{$options = options()}}
-{{dd($options)}}
-{{if(in.array('stream', $options))}}
 
-
-{{/if}}
-/*
+{{if(!is.empty($options['stream']))}}
 {{$stream = terminal.readline('stream')}}
 {{if(!is.empty($stream.server.config))}}
 {{$config = config($stream.server.config)}}
@@ -18,5 +14,4 @@ is stream
 is no stream
 {{/if}}
 {{/if}}
-*/
-
+{{/if}}
