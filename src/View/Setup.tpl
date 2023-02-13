@@ -7,6 +7,7 @@
 {{dd('yes')}}
 {{route.data($stream.server.route)}}
 {{/if}}
+{{dd('no')}}
 
 
 
