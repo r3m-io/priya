@@ -3,8 +3,8 @@
 
 {{if(!is.empty($options.stream))}}
     {{$stream = []}}
-    {{$stream['test.2'][2] = terminal.readline('stream')}}
-    {{dd($stream)}}
+    {{$stream[] = terminal.readline('stream')}}
+    {{dd(array.key.last($stream))}}
 {{else}}
     is no stream
 {{/if}}
