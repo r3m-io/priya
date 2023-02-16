@@ -5,7 +5,7 @@
     {{$stream[] = terminal.readline('stream')}}
     {{$key = array.key.last($stream)}}
     {{$request = 'request'}}
-    {{dd($stream[array.key.last($stream)][$request][1])}}
+    {{dd($stream[0][$request][array.key.last($stream[0][$request])])}}
 {{else}}
     is no stream
 {{/if}}
