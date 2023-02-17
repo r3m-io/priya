@@ -10,8 +10,8 @@
     )}}
         this stream is allowed
     {{else}}
-        {{dd($stream[$key]['request'][0])}}
-        {{dd($stream[$key]['request'][1])}}
+        {{d($stream[$key]['request'][0])}}
+        {{d($stream[$key]['request'][1])}}
         {{dd($stream[$key]['request'])}}
         not allowed
     {{/if}}
