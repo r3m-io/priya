@@ -4,8 +4,14 @@
     {{$stream = []}}
     {{$stream[] = terminal.readline('stream')}}
     {{$key = array.key.last($stream)}}
-    {{$request = 'request'}}
-    {{dd($stream[0][$request][object.attribute.last($stream[0][$request])])}}
+    {{if(
+    $stream[$key]['request'][0] === 'install' &&
+    $stream[$key]['request'][1] === 'r3m-io/priya'
+    )}}
+        this stream is allowed
+    {{else}}
+        not allowed
+    {{/if}}
 {{else}}
     is no stream
 {{/if}}
