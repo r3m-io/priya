@@ -10,6 +10,7 @@
     )}}
         this stream is allowed
     {{else}}
+        {{dd($stream[$key]['request'])}}
         not allowed
     {{/if}}
 {{else}}
