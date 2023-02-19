@@ -7,6 +7,7 @@ You can configure it in the main Public directory to have it accessible on each 
 You can configure it in one/or more of the host's Public directories.[3]
 
 [1] Please create a subdomain before continuing this script.
+    https://docs.r3m.io/Start/Configuration/#r3m-io-configure-domain
 [2] You need to move the files manually to the Public directory.
 [3] This setup.
 
@@ -25,6 +26,9 @@ With Javascript modules you can use Priya to save state, and you do not need to 
 Priya has namespaces available for huge amount of different states, it is endless.
 Request content and parse it as such with r3m-io/framework.
 Require Javascript and CSS as a master!
+
+When using a subdomain for the scripts (scripts.example.com for example) you also need to configure cors.
+https://docs.r3m.io/Security/Cors/
 
 {{$hostnames = Priya:Setup:hostnames()}}
 {{for.each($hostnames as $hostname)}}
