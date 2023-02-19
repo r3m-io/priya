@@ -33,6 +33,7 @@ https://docs.r3m.io/Security/Cors/
 {{$hostnames = Priya:Setup:hostnames()}}
 {{for.each($hostnames as $hostname)}}
 - {{$hostname}}
+
 {{/for.each}}
 {{$hostname = terminal.readline('input', 'Which hostname: ')}}
 - development
