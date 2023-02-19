@@ -15,6 +15,7 @@ Trait Setup {
         $object = $this->object();
         $url = $object->config('project.dir.data') . 'Hosts' . $object->config('extension.json');
         $read = $object->data_read($url);
+        ddd($read);
         $result = [];
         if($read){
             foreach($read->data() as $key => $host){
