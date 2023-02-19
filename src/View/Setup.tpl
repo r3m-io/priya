@@ -39,5 +39,5 @@ https://docs.r3m.io/Security/Cors/
 - development
 - production
 {{$environment = terminal.readline('input', 'Environment: ')}}
-
+{{d(config())}}
 {{dd('{{$this}}')}}
