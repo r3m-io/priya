@@ -36,8 +36,8 @@ https://docs.r3m.io/Security/Cors/
 
 {{/for.each}}
 {{$hostname = terminal.readline('input', 'Which hostname: ')}}
+{{dd($hostname)}}
 - development
 - production
 {{$environment = terminal.readline('input', 'Environment: ')}}
-{{d(config())}}
 {{dd('{{$this}}')}}
