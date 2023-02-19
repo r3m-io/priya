@@ -17,6 +17,7 @@ Trait Setup {
         $read = $object->data_read($url);
         $result = [];
         if($read){
+            ddd($read);
             foreach($read->data('host') as $key => $host){
                 $hostname = false;
                 if(
