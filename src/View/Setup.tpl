@@ -1,18 +1,38 @@
 {{R3M}}
-{{$options = options()}}
-{{if(!is.empty($options.stream))}}
-{{$stream = []}}
-{{$stream[] = terminal.readline('stream')}}
-{{$key = array.key.last($stream)}}
-{{if(
-$stream[$key]['request'][0] === 'install' &&
-$stream[$key]['request'][1] === 'r3m-io/priya'
-)}}
-this stream is allowed
-{{terminal.readline('input', 'type you text here')}}
-{{else}}
-not allowed
-{{/if}}
-{{else}}
-is no stream
-{{/if}}
+Welcome to the r3m-io/priya setup.
+There are three ways to configure priya.
+
+You can create a subdomain to host the javascript files.[1]
+You can configure it in the main Public directory to have it accessible on each domain.[2]
+You can configure it in one/or more of the host's Public directories.[3]
+
+[1] Please create a subdomain before continuing this script.
+[2] You need to move the files manually to the Public directory.
+[3] This setup.
+
+This setup can only install priya in one of the host's Public directories.
+You can decide which environment you will use:
+- development
+- production
+
+The development version will have separate files for each prototype.
+The production version will have an "All.prototype.js" with each prototype inside.
+The bootstrap.json will be changed accordingly.
+
+You can add your own files to the bootstrap.json file.
+There is no way (without error) to have a separate file for custom scripts, but modules are promising.
+With Javascript modules you can use Priya to save state, and you do not need to modify the bootstrap.json.
+Priya has namespaces available for huge amount of different states, it is endless.
+Request content and parse it as such with r3m-io/framework.
+Require Javascript and CSS as a master!
+
+{{$hostnames = Priya:Setup:hostnames()}}
+{{for.each($hostnames as $hostname)}}
+- {{$hostname}}
+{{/for.each}}
+{{$hostname = terminal.readline('input', 'Which hostname: ')}}
+- development
+- production
+{{$environment = terminal.readline('input', 'Environment: ')}}
+
+{{dd('{{$this}}')}}
