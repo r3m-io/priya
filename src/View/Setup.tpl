@@ -57,5 +57,7 @@ https://docs.r3m.io/Security/Cors/
 
 {{Priya:Setup:install([
 'hostname' => $hostname,
-'environment' => $environment
+'environment' => $environment,
+'public' => 'Public',
+'target' => '/Js/Priya/' + object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'collect.version') + '/'
 ])}}
