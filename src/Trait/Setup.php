@@ -83,5 +83,8 @@ Trait Setup {
         }
     }
 
+    public function run($options=[]){
+        ddd($options);
+    }
 
 }

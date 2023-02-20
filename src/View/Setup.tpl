@@ -48,11 +48,14 @@ https://docs.r3m.io/Security/Cors/
 
 {{/for.each}}
 {{while(true)}}
-{{$environment = terminal.readline('Environment: ')}}
+{{$environment = terminal.readline('Which environment: ')}}
 {{$environment = Priya:Setup:bestmatch($environment, $environments)}}
 {{if(!is.empty($environment))}}
 {{break()}}
 {{/if}}
 {{/while}}
 
-{{dd('{{$this}}')}}
+{{Priya:Setup:run([
+'hostname' => $hostname
+'environment' => $environment
+])}}
