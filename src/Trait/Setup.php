@@ -4,6 +4,7 @@ namespace Priya;
 
 use Exception;
 use R3m\Io\Config;
+use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
 use R3m\Io\Module\File;
@@ -107,7 +108,6 @@ Trait Setup {
                 foreach($read as $file){
                     if($file->type === File::TYPE){
                         $target = explode($url, $file->url, 2);
-                        ddd($target);
                         if(array_key_exists(1, $target)){
                             $target = $options['target'] . $target[1];
                             $dir = Dir::name($target);
@@ -116,6 +116,12 @@ Trait Setup {
                         }
                     }
                 }
+                $id = posix_getuid();
+                if(empty($id)){
+                    $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
+                    Core::execute($object, $command);
+                }
+
                 echo 'Installation complete: ' . $options['target'] . PHP_EOL;
             } else {
                 //MODE_PRODUCTION
