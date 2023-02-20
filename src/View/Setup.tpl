@@ -36,6 +36,10 @@ https://docs.r3m.io/Security/Cors/
 
 {{/for.each}}
 {{$hostname = terminal.readline('Which hostname: ')}}
-- development
-- production
+{{$hostname = Priya:Setup:bestmatch($hostname, $hostnames)}}
+{{$environments = Priya:Setup:environments()}}
+{{for.each($environments as $environment)}}
+- {{$environment}}
+
+{{/for.each}}
 {{$environment = terminal.readline('Environment: ')}}

@@ -39,5 +39,28 @@ Trait Setup {
         return $result;
     }
 
+    public function environments(): array
+    {
+        return [
+            'development',
+            'production'
+        ];
+    }
+
+    public function bestmatch($search='', $options=[]){
+        foreach($options as $nr => $option){
+            $length = strlen($option);
+            if(!$min){
+                $min = $length;
+                continue;
+            }
+            if($length < $min){
+                $min = $length;
+            }
+        }
+        d($options);
+        ddd($min);
+    }
+
 
 }
