@@ -83,7 +83,7 @@ Trait Setup {
         }
     }
 
-    public function run($options=[]){
+    public function install($options=[]){
         ddd($options);
     }
 
