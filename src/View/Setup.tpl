@@ -56,6 +56,6 @@ https://docs.r3m.io/Security/Cors/
 {{/while}}
 
 {{Priya:Setup:run([
-'hostname' => $hostname
+'hostname' => $hostname,
 'environment' => $environment
 ])}}
