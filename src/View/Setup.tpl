@@ -54,10 +54,32 @@ https://docs.r3m.io/Security/Cors/
 {{break()}}
 {{/if}}
 {{/while}}
-
+{{if(Priya:Setup:has_subdomain($hostname))}}
 {{Priya:Setup:install([
 'hostname' => $hostname,
 'environment' => $environment,
-'public' => 'Public',
-'target' => '/Js/Priya/' + object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'collect.version') + '/'
+'target' =>
+config('project.dir.host') +
+Priya:Setup:extract_dir_subdomain($hostname) +
+'/' +
+Priya:Setup:extract_dir_domain($hostname) +
+'/' +
+Priya:Setup:extract_dir_extension($hostname) +
+'/Public/Js/Priya/' +
+object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'collect.version') +
+'/'
 ])}}
+{{else}}
+{{Priya:Setup:install([
+'hostname' => $hostname,
+'environment' => $environment,
+'target' =>
+config('project.dir.host') +
+Priya:Setup:extract_dir_domain($hostname) +
+'/' +
+Priya:Setup:extract_dir_extension($hostname) +
+'/Public/Js/Priya/' +
+object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'collect.version') +
+'/'
+])}}
+{{/if}}

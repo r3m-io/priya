@@ -87,4 +87,62 @@ Trait Setup {
         ddd($options);
     }
 
+    public function has_subdomain($hostname=''){
+        $explode = explode('.', $hostname, 3);
+        if(array_key_exists(2, $explode)){
+            return true;
+        }
+        return false;
+    }
+
+    public function extract_dir_subdomain($hostname=''){
+        $explode = explode('.', $hostname, 3);
+        $count = count($explode);
+        if(
+            $count === 3 &&
+            array_key_exists(0, $explode)
+        ){
+            $subdomain = ucfirst($explode[0]);
+            return $subdomain;
+        }
+    }
+
+    public function extract_dir_domain($hostname=''){
+        $explode = explode('.', $hostname, 3);
+        $count = count($explode);
+        if(
+            $count === 3 &&
+            array_key_exists(1, $explode)
+        ){
+            $domain = ucfirst($explode[1]);
+            return $domain;
+        }
+        elseif(
+            $count === 2  &&
+            array_key_exists(0, $explode)
+        ){
+            $domain = ucfirst($explode[0]);
+            return $domain;
+        }
+    }
+
+    public function extract_dir_extension($hostname=''){
+        $explode = explode('.', $hostname, 3);
+        $count = count($explode);
+        if(
+            $count === 3 &&
+            array_key_exists(2, $explode)
+        ){
+            $extension = ucfirst($explode[2]);
+            return $extension;
+        }
+        elseif(
+            $count === 2 &&
+            array_key_exists(1, $explode)
+        ) {
+            $extension = ucfirst($explode[1]);
+            return $extension;
+        }
+    }
+
 }
