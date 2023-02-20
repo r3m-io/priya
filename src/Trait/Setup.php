@@ -84,6 +84,17 @@ Trait Setup {
     }
 
     public function install($options=[]){
+        if(empty($options['target'])){
+            return;
+        }
+        if(Dir::is($options['target'])){
+            throw new Exception('Target exists: ' . $options['target']);
+        }
+        $object = $this->object();
+        $dir = new Dir();
+        $url = $object->config('controller.dir.public') . 'Priya' . $object->config('ds');
+        $read = $dir->read($url, true);
+        d($read);
         ddd($options);
     }
 
