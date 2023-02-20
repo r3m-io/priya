@@ -38,7 +38,7 @@ https://docs.r3m.io/Security/Cors/
 {{while(true)}}
 {{$hostname = terminal.readline('Which hostname: ')}}
 {{$hostname = Priya:Setup:bestmatch($hostname, $hostnames)}}
-{{if(!empty($hostname))}}
+{{if(!is.empty($hostname))}}
 {{break()}}
 {{/if}}
 {{/while}}
@@ -50,7 +50,7 @@ https://docs.r3m.io/Security/Cors/
 {{while(true)}}
 {{$environment = terminal.readline('Environment: ')}}
 {{$environment = Priya:Setup:bestmatch($environment, $environments)}}
-{{if(!empty($environment))}}
+{{if(!is.empty($environment))}}
 {{break()}}
 {{/if}}
 {{/while}}
