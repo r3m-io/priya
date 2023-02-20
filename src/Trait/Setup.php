@@ -65,13 +65,13 @@ Trait Setup {
                 $min = 255;
             }
         }
-        $match = [];
+        $bestmatch = [];
         foreach($options as $nr => $option){
             $match = substr($option, 0, $min);
             $score = levenshtein($search, $match);
-            $match[$score][] = $option;
+            $bestmatch[$score][] = $option;
         }
-        ddd($match);
+        ddd($bestmatch);
     }
 
 
