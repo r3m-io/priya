@@ -48,6 +48,7 @@ Trait Setup {
     }
 
     public function bestmatch($search='', $options=[]){
+        $min = false;
         foreach($options as $nr => $option){
             $length = strlen($option);
             if(!$min){
