@@ -69,9 +69,18 @@ Trait Setup {
         foreach($options as $nr => $option){
             $match = substr($option, 0, $min);
             $score = levenshtein($search, $match);
+            if($score === $min){
+                continue;   //no match
+            }
             $bestmatch[$score][] = $option;
         }
-        ddd($bestmatch);
+        if(!empty($bestmatch)){
+            ksort($bestmatch, SORT_NATURAL);
+            $result = reset($bestmatch);
+            if(array_key_exists(0, $result)){
+                return $result[0];
+            }
+        }
     }
 
 
