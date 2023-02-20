@@ -49,6 +49,9 @@ Trait Setup {
 
     public function bestmatch($search='', $options=[]){
         $min = false;
+        if(strlen($search) > 255){
+            $search = strlen($search, 0, 255);
+        }
         foreach($options as $nr => $option){
             $length = strlen($option);
             if(!$min){
@@ -58,9 +61,17 @@ Trait Setup {
             if($length < $min){
                 $min = $length;
             }
+            if($min > 255){
+                $min = 255;
+            }
         }
-        d($options);
-        ddd($min);
+        $match = [];
+        foreach($options as $nr => $option){
+            $match = substr($option, 0, $min);
+            $score = levenshtein($search, $match);
+            $match[$score][] = $option;
+        }
+        ddd($match);
     }
 
 
