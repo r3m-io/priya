@@ -2,8 +2,11 @@
 
 namespace Priya;
 
+use Exception;
+use R3m\Io\Config;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
+use R3m\Io\Module\File;
 use R3m\Io\Module\Sort;
 use stdClass;
 
@@ -83,6 +86,9 @@ Trait Setup {
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function install($options=[]){
         if(empty($options['target'])){
             return;
@@ -94,8 +100,27 @@ Trait Setup {
         $dir = new Dir();
         $url = $object->config('controller.dir.public') . 'Priya' . $object->config('ds');
         $read = $dir->read($url, true);
-        d($read);
-        ddd($options);
+
+        if($read){
+            if($options['environment'] === Config::MODE_DEVELOPMENT){
+                Dir::create($options['target']);
+                foreach($read as $file){
+                    if($file->type === File::TYPE){
+                        $target = explode($url, $file->url, 2);
+                        if(array_key_exists(1, $target)){
+                            $target = $options['target'] . $target[1];
+                            $dir = Dir::name($target);
+                            Dir::create($dir);
+                            File::copy($file->url, $target, true);
+                        }
+                    }
+                }
+                echo 'Installation complete: ' . $options['target'] . PHP_EOL;
+            } else {
+                //MODE_PRODUCTION
+                ddd('mode production');
+            }
+        }
     }
 
     public function has_subdomain($hostname=''){
