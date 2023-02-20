@@ -107,11 +107,12 @@ Trait Setup {
                 foreach($read as $file){
                     if($file->type === File::TYPE){
                         $target = explode($url, $file->url, 2);
+                        ddd($target);
                         if(array_key_exists(1, $target)){
                             $target = $options['target'] . $target[1];
                             $dir = Dir::name($target);
                             Dir::create($dir);
-                            File::copy($file->url, $target, true);
+                            File::copy($file->url, $target);
                         }
                     }
                 }
