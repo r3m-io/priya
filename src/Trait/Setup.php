@@ -160,23 +160,6 @@ Trait Setup {
                         }
                     }
                 }
-                $dir = Dir::name($options['target']);
-                Dir::change($dir);
-                $link = 'Latest';
-                if (File::exist($dir . $link)) {
-                    File::delete($dir . $link);
-                }
-                $explode = explode($dir, $options['target'], 2);
-                $version = array_pop($explode);
-                if (substr($version, -1, -1) === $object->config('ds')) {
-                    $version = substr($version, 0, -1);
-                }
-                File::link($version, $link);
-                $id = posix_getuid();
-                if (empty($id)) {
-                    $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
-                    Core::execute($object, $command);
-                }
             }
         } else {
             //MODE_PRODUCTION
@@ -227,6 +210,23 @@ Trait Setup {
                 $target_url = $dir . $source;
                 File::copy($source_url, $target_url);
             }
+        }
+        $dir = Dir::name($options['target']);
+        Dir::change($dir);
+        $link = 'Latest';
+        if (File::exist($dir . $link)) {
+            File::delete($dir . $link);
+        }
+        $explode = explode($dir, $options['target'], 2);
+        $version = array_pop($explode);
+        if (substr($version, -1, -1) === $object->config('ds')) {
+            $version = substr($version, 0, -1);
+        }
+        File::link($version, $link);
+        $id = posix_getuid();
+        if (empty($id)) {
+            $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
+            Core::execute($object, $command);
         }
         echo 'Installation complete: ' . $options['target'] . PHP_EOL;
     }
