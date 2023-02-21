@@ -122,10 +122,14 @@ Trait Setup {
                     $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
                     Core::execute($object, $command);
                 }
-                $link = Dir::name($options['target']) . 'Latest' . $object->config('ds');
-                if(File::exist($link)){
-                    File::delete($link);
+                $dir = Dir::name($options['target']);
+                Dir::change($dir);
+                $link = 'Latest';
+                if(File::exist($dir . $link)){
+                    File::delete($dir . $link);
                 }
+                $explode = explode($dir, $options['target'], 2);
+                ddd($explode);
                 File::link($options['target'], $link);
                 echo 'Installation complete: ' . $options['target'] . PHP_EOL;
             } else {
