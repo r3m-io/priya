@@ -143,17 +143,16 @@ Trait Setup {
 //            throw new Exception('Target exists: ' . $options['target']);
         }
         $object = $this->object();
-        $dir = new Dir();
-        $url = $object->config('controller.dir.public') . 'Priya' . $object->config('ds');
-        $read = $dir->read($url, true);
-
-        if($read){
-            if($options['environment'] === Config::MODE_DEVELOPMENT){
+        if($options['environment'] === Config::MODE_DEVELOPMENT) {
+            $dir = new Dir();
+            $url = $object->config('controller.dir.public') . 'Priya' . $object->config('ds');
+            $read = $dir->read($url, true);
+            if ($read) {
                 Dir::create($options['target']);
-                foreach($read as $file){
-                    if($file->type === File::TYPE){
+                foreach ($read as $file) {
+                    if ($file->type === File::TYPE) {
                         $target = explode($url, $file->url, 2);
-                        if(array_key_exists(1, $target)){
+                        if (array_key_exists(1, $target)) {
                             $target = $options['target'] . $target[1];
                             $dir = Dir::name($target);
                             Dir::create($dir);
@@ -164,25 +163,49 @@ Trait Setup {
                 $dir = Dir::name($options['target']);
                 Dir::change($dir);
                 $link = 'Latest';
-                if(File::exist($dir . $link)){
+                if (File::exist($dir . $link)) {
                     File::delete($dir . $link);
                 }
                 $explode = explode($dir, $options['target'], 2);
                 $version = array_pop($explode);
-                if(substr($version, -1, -1) === $object->config('ds')){
-                   $version = substr($version, 0, -1);
+                if (substr($version, -1, -1) === $object->config('ds')) {
+                    $version = substr($version, 0, -1);
                 }
                 File::link($version, $link);
                 $id = posix_getuid();
-                if(empty($id)){
+                if (empty($id)) {
                     $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
                     Core::execute($object, $command);
                 }
                 echo 'Installation complete: ' . $options['target'] . PHP_EOL;
-            } else {
-                //MODE_PRODUCTION
-                ddd('mode production');
             }
+        } else {
+            //MODE_PRODUCTION
+            $url =
+                $object->config('controller.dir.public') .
+                'Priya' .
+                $object->config('ds') .
+                'Bin' .
+                $object->config('ds') .
+                'Bootstrap.json'
+            ;
+            $data = $object->data_read($url);
+            $list = $data->data('require.file');
+            sort($list, SORT_NATURAL);
+            $core = [];
+            foreach($list as $nr => $file){
+                $comment = [];
+                $comment[] = '/**';
+                $comment[] = ' * ' . $file;
+                $comment[] = ' */';
+                $core[] = implode(PHP_EOL, $comment);
+                $file = $object->config('controller.dir.public') . 'Priya/Bin/' . $file;
+                $read = File::read($file);
+                $core[] = $read;
+                $core[] = '';
+            }
+            $core = implode(PHP_EOL, $core);
+            ddd($core);
         }
     }
 
