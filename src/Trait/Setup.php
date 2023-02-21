@@ -177,7 +177,6 @@ Trait Setup {
                     $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
                     Core::execute($object, $command);
                 }
-                echo 'Installation complete: ' . $options['target'] . PHP_EOL;
             }
         } else {
             //MODE_PRODUCTION
@@ -205,8 +204,31 @@ Trait Setup {
                 $core[] = '';
             }
             $core = implode(PHP_EOL, $core);
-            ddd($core);
+            $file = 'Core-' . $data->data('collect.version') . '.js';
+            $dir = $options['target'] . 'Bin/';
+            Dir::create($dir);
+            $url = $dir . $file;
+            File::put($url, $core);
+            $list = [];
+            $list[] = $file;
+            $data->data('require.file', $list);
+            $url = $dir . 'Bootstrap.json';
+            File::put($url, Core::object($data->data(), Core::OBJECT_JSON));
+            $dir = $options['target'];
+            $source_list = [
+                'Bin/Priya.prototype.js',
+                'Priya.js',
+                'README.md',
+                'LICENSE',
+                'example.html'
+            ];
+            foreach($source_list as $source){
+                $source_url = $object->config('controller.dir.public') . 'Priya' . '/' . $source;
+                $target_url = $dir . $source;
+                File::copy($source_url, $target_url);
+            }
         }
+        echo 'Installation complete: ' . $options['target'] . PHP_EOL;
     }
 
     public function has_subdomain($hostname=''){
