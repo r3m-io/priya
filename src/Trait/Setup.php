@@ -103,10 +103,18 @@ Trait Setup {
         }
         $list = array_unique($list);
         $hostnames = [];
+        $setup_default = false;
         foreach($list as $hostname){
+            if($setup_default === false){
+                $setup_default = $hostname;
+            }
             $hostnames[] = $hostname;
-            $hostnames[] = '*' . $hostname;
+            $hostnames[] = '*.' . $hostname;
         }
+        $command = Core::binary() . ' configure cors setup default ' . escapeshellcmd($setup_default);
+        Core::execute($command, $output, $error);
+        d($output);
+        d($error);
         ddd($hostnames);
     }
 
