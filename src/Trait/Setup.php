@@ -95,7 +95,8 @@ Trait Setup {
             return;
         }
         if(Dir::is($options['target'])){
-            throw new Exception('Target exists: ' . $options['target']);
+            Dir::remove($options['target']);
+//            throw new Exception('Target exists: ' . $options['target']);
         }
         $object = $this->object();
         $dir = new Dir();
@@ -121,7 +122,11 @@ Trait Setup {
                     $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
                     Core::execute($object, $command);
                 }
-
+                $link = Dir::name($options['target']) . 'Latest' . $object->config('ds');
+                if(File::exist($link)){
+                    File::delete($link);
+                }
+                File::link($options['target'], $link);
                 echo 'Installation complete: ' . $options['target'] . PHP_EOL;
             } else {
                 //MODE_PRODUCTION
