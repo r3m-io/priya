@@ -111,13 +111,18 @@ Trait Setup {
         foreach($list as $hostname){
             if($setup_default === false){
                 $setup_default = $hostname;
+            } else {
+                $hostnames[] = $hostname;
             }
-            $hostnames[] = $hostname;
             $hostnames[] = '*.' . $hostname;
         }
         $object = $this->object();
         $command = Core::binary() . ' configure cors setup default ' . escapeshellcmd($setup_default);
         Core::execute($object, $command, $output, $error);
+        foreach($hostnames as $hostname){
+            $command = Core::binary() . ' configure cors domain add ' . escapeshellcmd($hostname);
+            Core::execute($object, $command, $output, $error);
+        }
         d($output);
         d($error);
         ddd($hostnames);
