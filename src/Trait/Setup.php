@@ -87,6 +87,23 @@ Trait Setup {
         }
     }
 
+    public function cors($options=[]){
+        $hostnames = $this->hostnames();
+        $list = [];
+        foreach($hostnames as $hostname){
+            $explode = explode('.', $hostname, 3);
+            if(array_key_exists(2, $explode)){
+                //don't need subdomains
+                $list[] = $explode[1] . '.' . $explode[2];
+            }
+            elseif(array_key_exists(1, $explode)){
+                $list[] = $explode[0] . '.' . $explode[1];
+            }
+        }
+        $list = array_unique($list);
+        ddd($list);
+    }
+
     /**
      * @throws Exception
      */
@@ -117,11 +134,6 @@ Trait Setup {
                         }
                     }
                 }
-                $id = posix_getuid();
-                if(empty($id)){
-                    $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
-                    Core::execute($object, $command);
-                }
                 $dir = Dir::name($options['target']);
                 Dir::change($dir);
                 $link = 'Latest';
@@ -134,6 +146,11 @@ Trait Setup {
                    $version = substr($version, 0, -1);
                 }
                 File::link($version, $link);
+                $id = posix_getuid();
+                if(empty($id)){
+                    $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
+                    Core::execute($object, $command);
+                }
                 echo 'Installation complete: ' . $options['target'] . PHP_EOL;
             } else {
                 //MODE_PRODUCTION
