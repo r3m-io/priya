@@ -120,7 +120,7 @@ Trait Setup {
         $command = Core::binary() . ' configure cors setup default ' . escapeshellcmd($setup_default);
         Core::execute($object, $command, $output, $error);
         foreach($hostnames as $hostname){
-            $command = Core::binary() . ' configure cors domain add ' . escapeshellcmd($hostname);
+            $command = Core::binary() . ' configure cors domain enable ' . escapeshellcmd($hostname);
             Core::execute($object, $command, $output, $error);
         }
         d($output);
