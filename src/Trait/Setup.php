@@ -4,6 +4,7 @@ namespace Priya;
 
 use Exception;
 use R3m\Io\Config;
+use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
 use R3m\Io\Module\Data;
 use R3m\Io\Module\Dir;
@@ -88,6 +89,9 @@ Trait Setup {
         }
     }
 
+    /**
+     * @throws ObjectException
+     */
     public function cors($options=[]){
         $hostnames = $this->hostnames();
         $list = [];
@@ -111,8 +115,9 @@ Trait Setup {
             $hostnames[] = $hostname;
             $hostnames[] = '*.' . $hostname;
         }
+        $object = $this->object();
         $command = Core::binary() . ' configure cors setup default ' . escapeshellcmd($setup_default);
-        Core::execute($command, $output, $error);
+        Core::execute($object, $command, $output, $error);
         d($output);
         d($error);
         ddd($hostnames);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7194d2558c9e3ba7e97f3f1dab901b07",
+    "content-hash": "7dddbc4c45be20faa6f11e48ce1ea5af",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -280,12 +280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/like-it/r3m-framework.git",
-                "reference": "0fa3b483d877282c01f4ea9db29ff2ee6ecbb74f"
+                "reference": "0e715cf4326877dd25ef1222a2ef942a73487661"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/like-it/r3m-framework/zipball/0fa3b483d877282c01f4ea9db29ff2ee6ecbb74f",
-                "reference": "0fa3b483d877282c01f4ea9db29ff2ee6ecbb74f",
+                "url": "https://api.github.com/repos/like-it/r3m-framework/zipball/0e715cf4326877dd25ef1222a2ef942a73487661",
+                "reference": "0e715cf4326877dd25ef1222a2ef942a73487661",
                 "shasum": ""
             },
             "require": {
@@ -293,7 +293,9 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
+                "ext-pcntl": "*",
                 "ext-posix": "*",
+                "ext-readline": "*",
                 "ext-zend-opcache": "*",
                 "monolog/monolog": "^2.2",
                 "php": ">=7.4"
@@ -328,7 +330,7 @@
                 "issues": "https://github.com/like-it/r3m-framework/issues",
                 "source": "https://github.com/like-it/r3m-framework/tree/dev"
             },
-            "time": "2023-02-07T18:40:30+00:00"
+            "time": "2023-02-21T21:02:31+00:00"
         }
     ],
     "packages-dev": [],
@@ -339,7 +341,9 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-posix": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
 }
