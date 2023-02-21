@@ -86,7 +86,7 @@ object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'col
 {{if(is.empty(config('server.cors')))}}
 Now it is time to enable CORS for domains who have to reach {{$hostname}}.
 
-We think the defaults are sufficient for now, you can adjust it, if you want.
+We think the defaults are sufficient for now, you can adjust them, if you want later.
 {{Priya:Setup:cors()}}
 {{else}}
 Cors seems to be configured already.
