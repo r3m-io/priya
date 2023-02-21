@@ -25,6 +25,7 @@ Trait Setup {
                 $hostname = false;
                 if(
                     property_exists($host, 'subdomain') &&
+                    $host->subdomain !== false &&
                     property_exists($host, 'domain') &&
                     property_exists($host, 'extension')
                 ){
