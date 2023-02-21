@@ -129,8 +129,11 @@ Trait Setup {
                     File::delete($dir . $link);
                 }
                 $explode = explode($dir, $options['target'], 2);
-                ddd($explode);
-                File::link($options['target'], $link);
+                $version = array_pop($explode);
+                if(substr($version, -1, -1) === $object->config('ds')){
+                   $version = substr($version, 0, -1);
+                }
+                File::link($version, $link);
                 echo 'Installation complete: ' . $options['target'] . PHP_EOL;
             } else {
                 //MODE_PRODUCTION
