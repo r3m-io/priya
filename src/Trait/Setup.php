@@ -127,6 +127,7 @@ Trait Setup {
         }
         $instance = App::instance();
         $cors = $instance->config('server.cors');
+        echo 'Cors configuration: ' . PHP_EOL;
         echo Core::object($cors, Core::OBJECT_JSON) . PHP_EOL;
     }
 

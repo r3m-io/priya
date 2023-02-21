@@ -90,11 +90,4 @@ We think the defaults are sufficient for now, you can adjust them, if you want l
 {{Priya:Setup:cors()}}
 {{else}}
 Cors seems to be configured already.
-{{Priya:Setup:cors()}}
 {{/if}}
-
-
-
-
-
-
