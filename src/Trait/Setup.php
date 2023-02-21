@@ -101,7 +101,12 @@ Trait Setup {
             }
         }
         $list = array_unique($list);
-        ddd($list);
+        $hostnames = [];
+        foreach($list as $hostname){
+            $hostnames[] = $hostname;
+            $hostnames[] = '*' . $hostname;
+        }
+        ddd($hostnames);
     }
 
     /**
