@@ -3,6 +3,7 @@
 namespace Priya;
 
 use Exception;
+use R3m\Io\App;
 use R3m\Io\Config;
 use R3m\Io\Exception\ObjectException;
 use R3m\Io\Module\Core;
@@ -91,6 +92,7 @@ Trait Setup {
 
     /**
      * @throws ObjectException
+     * @throws Exception
      */
     public function cors($options=[]){
         $hostnames = $this->hostnames();
@@ -123,9 +125,9 @@ Trait Setup {
             $command = Core::binary() . ' configure cors domain enable ' . escapeshellcmd($hostname);
             Core::execute($object, $command, $output, $error);
         }
-        d($output);
-        d($error);
-        ddd($hostnames);
+        $instance = App::instance();
+        $cors = $instance->config('server.cors');
+        echo Core::object($cors, Core::OBJECT_JSON) . PHP_EOL;
     }
 
     /**
