@@ -299,12 +299,10 @@ Trait Setup {
                     $node->date = $installation->get('date');
                     $node->directory = $installation->get('directory');
                     $list[$nr] = $node;
-                    ddd($list);
                 }
             } else {
                 $list[] = $installation->data();
             }
-
             $install->set('installation', $list);
             $install->write($url);
         }
