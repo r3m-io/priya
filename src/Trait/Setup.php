@@ -285,6 +285,31 @@ Trait Setup {
         echo 'Installation complete: ' . $options['target'] . PHP_EOL;
     }
 
+    /**
+     * @throws ObjectException
+     */
+    public function update($package){
+        $object = $this->object();
+        if($package->has('composer')){
+            Dir::change($object->config('project.dir.root'));
+            Core::execute($object, $package->get('composer'), $output, $error);
+            if($output){
+                echo $output;
+            }
+            if($error){
+                echo $error;
+            }
+        }
+        if($package->has('installation')){
+            $data = $object->data_read($package->get('installation'));
+            if($data){
+                foreach($data->get('installation') as $installation){
+                    dd($installation);
+                }
+            }
+        }
+    }
+
     public function has_subdomain($hostname=''){
         $explode = explode('.', $hostname, 3);
         if(array_key_exists(2, $explode)){
