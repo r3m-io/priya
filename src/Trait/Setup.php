@@ -251,11 +251,17 @@ Trait Setup {
         $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
         $parse = new Parse($object);
         $package = Core::object_select($parse, $parse->storage(), $url, 'package.r3m-io/priya', true, 'item');
-        $installation->set('installation.package.name', $package->get('name'));
-        $url = $package->get('installation');
-        $dir = Dir::name($url);
-        Dir::create($dir);
-        $installation->write($url);
+        if(
+            $package &&
+            property_exists($package, 'name') &&
+            property_exists($package, 'installation')
+        ){
+            $installation->set('installation.package.name', $package->name);
+            $url = $package->installation;
+            $dir = Dir::name($url);
+            Dir::create($dir);
+            $installation->write($url);
+        }
         if (empty($id)) {
             $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
             Core::execute($object, $command);
