@@ -249,10 +249,7 @@ Trait Setup {
         $installation->set('installation.version', $version);
         File::link($version, $link);
         $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
-        $parse = new Parse($object);
-        $package = Data::select(
-            $parse,
-            $parse->storage(),
+        $package = $object->data_select(
             $url,
             'package.r3m-io/priya',
             true,
