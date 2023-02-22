@@ -276,8 +276,6 @@ Trait Setup {
                 $node = false;
                 $nr = null;
                 foreach($list as $nr => $record){
-                    d($options);
-                    ddd($record);
                     if(
                         property_exists($record, 'hostname') &&
                         $record->hostname === $options['hostname']
@@ -288,7 +286,7 @@ Trait Setup {
                 }
                 if(
                     $node &&
-                    $nr
+                    $nr !== null
                 ){
                     if(property_exists($node, 'version')){
                         $restore_version = $node->version;
