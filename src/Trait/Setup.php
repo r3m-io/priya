@@ -272,7 +272,38 @@ Trait Setup {
             if(!is_array($list)){
                 $list = [];
             }
-            $list[] = $installation->data();
+            if(!empty($options['update'])){
+                $node = false;
+                $nr = null;
+                foreach($list as $nr => $record){
+                    if(
+                        property_exists($record, 'hostname') &&
+                        $record->hostname === $options['hostname']
+                    ){
+                        $node = $record;
+                        break;
+                    }
+                }
+                if(
+                    $node &&
+                    $nr
+                ){
+                    if(property_exists($node, 'version')){
+                        $restore_version = $node->version;
+                        if(!property_exists($node, 'restore')){
+                            $node->restore = [];
+                        }
+                        $node->restore[] = $restore_version;
+                    }
+                    $node->version =  $installation->get('version');;
+                    $node->date = $installation->get('date');
+                    $node->directory = $installation->get('directory');
+                    $list[$nr] = $node;
+                }
+            } else {
+                $list[] = $installation->data();
+            }
+
             $install->set('installation', $list);
             $install->write($url);
         }
@@ -310,7 +341,12 @@ Trait Setup {
                     foreach($data->get('installation') as $installation){
                         if(property_exists($installation, 'version')){
                             if(version_compare($boot->get('collect.version'), $installation->version, '!=')){
-                                ddd('update');
+                                $this->install([
+                                    'hostname' => $installation->hostname,
+                                    'environment' => $installation->environment,
+                                    'target' => dir::name($installation->directory) . $boot->get('collect.version') . $object->config('ds'),
+                                    'update' => true
+                                ]);
                             }
                         }
                     }
