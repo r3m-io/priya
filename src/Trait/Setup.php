@@ -304,8 +304,16 @@ Trait Setup {
         if($package->has('installation')){
             $data = $object->data_read($package->get('installation'));
             if($data){
-                foreach($data->get('installation') as $installation){
-                    dd($installation);
+                $url = $object->config('controller.dir.public') . 'Priya/Bin/Bootstrap' . $object->config('extension.json');
+                $boot = $object->data_read($url);
+                if($boot){
+                    foreach($data->get('installation') as $installation){
+                        if(property_exists($installation, 'version')){
+                            if(version_compare($boot->get('collect.version'), $installation->version, '!=')){
+                                ddd('update');
+                            }
+                        }
+                    }
                 }
             }
         }
