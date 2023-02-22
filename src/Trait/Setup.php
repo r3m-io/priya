@@ -290,6 +290,7 @@ Trait Setup {
      */
     public function update($package){
         $object = $this->object();
+        $package = new Data($package);
         if($package->has('composer')){
             Dir::change($object->config('project.dir.root'));
             Core::execute($object, $package->get('composer'), $output, $error);
