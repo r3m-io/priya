@@ -269,6 +269,9 @@ Trait Setup {
             if(empty($list)){
                 $list = [];
             }
+            if(!is_array($list)){
+                $list = [];
+            }
             $list[] = $installation->data();
             $install->set('installation', $list);
             $install->write($url);
