@@ -136,12 +136,23 @@ Trait Setup {
      * @throws Exception
      */
     public function install($options=[]){
+        $id = posix_getuid();
+        if(
+            !in_array(
+                $id,
+                [
+                    0,
+                    33
+                ]
+            )
+        ){
+            throw new Exception('Only root & www-data can setup install...');
+        }
         if(empty($options['target'])){
             return;
         }
         if(Dir::is($options['target'])){
             Dir::remove($options['target']);
-//            throw new Exception('Target exists: ' . $options['target']);
         }
         $object = $this->object();
         $installation = new Data();
@@ -232,27 +243,25 @@ Trait Setup {
         }
         $explode = explode($dir, $options['target'], 2);
         $version = array_pop($explode);
-        if (substr($version, -1, -1) === $object->config('ds')) {
+        if (substr($version, -1, 1) === $object->config('ds')) {
             $version = substr($version, 0, -1);
         }
         $installation->set('installation.version', $version);
         File::link($version, $link);
-        $id = posix_getuid();
-        if (empty($id)) {
-            $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
-            Core::execute($object, $command);
-        }
         $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
         $parse = new Parse($object);
         $package = Core::object_select($parse, $parse->storage(), $url, 'package.r3m-io/priya', true, 'item');
-        d($installation);
-        ddd($package);
-        /*
-        {{$url = config('framework.dir.data') + config('dictionary.package') + config('extension.json')}}
-        {{$package = object.select($url, 'package.' + $key, true, 'item')}}
-        */
-
-//        $url = $object->config('')
+        $installation->set('installation.package.name', $package->get('name'));
+        $url = $package->get('installation');
+        $dir = Dir::name($url);
+        Dir::create($dir);
+        $installation->write($url);
+        if (empty($id)) {
+            $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
+            Core::execute($object, $command);
+            $command = 'chown www-data:www-data ' . $object->config('project.dir.data') . ' -R';
+            Core::execute($object, $command);
+        }
         echo 'Installation complete: ' . $options['target'] . PHP_EOL;
     }
 
