@@ -242,9 +242,9 @@ Trait Setup {
             $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';
             Core::execute($object, $command);
         }
-        $url = $object->config('framework.dir.data') + $object->config('dictionary.package') + $object->config('extension.json');
+        $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
         $parse = new Parse($object);
-        $package = Core::object_select($parse, $parse->data(), $url, 'package.r3m-io/priya', true, 'item');
+        $package = Core::object_select($parse, $parse->storage(), $url, 'package.r3m-io/priya', true, 'item');
         d($installation);
         ddd($package);
         /*
