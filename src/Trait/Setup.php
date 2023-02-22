@@ -160,10 +160,10 @@ Trait Setup {
             array_key_exists('hostname', $options) &&
             array_key_exists('environment', $options)
         ){
-            $installation->set('installation.date', date('Y-m-d H:i:s+00:00'));
-            $installation->set('installation.directory', $options['target']);
-            $installation->set('installation.hostname', $options['hostname']);
-            $installation->set('installation.environment', $options['environment']);
+            $installation->set('date', date('Y-m-d H:i:s+00:00'));
+            $installation->set('directory', $options['target']);
+            $installation->set('hostname', $options['hostname']);
+            $installation->set('environment', $options['environment']);
         }
         if($options['environment'] === Config::MODE_DEVELOPMENT) {
             $dir = new Dir();
@@ -246,23 +246,32 @@ Trait Setup {
         if (substr($version, -1, 1) === $object->config('ds')) {
             $version = substr($version, 0, -1);
         }
-        $installation->set('installation.version', $version);
+        $installation->set('version', $version);
         File::link($version, $link);
         $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
-        $package = $object->data_select(
+        $package = $object->parse_select(
             $url,
-            'package.r3m-io/priya',
-            true,
-            'object'
+            'package.r3m-io/priya'
         );
         if(
             $package
         ){
-            $installation->set('installation.package.name', $package->get('name'));
+            $installation->set('package.name', $package->get('name'));
             $url = $package->get('installation');
             $dir = Dir::name($url);
             Dir::create($dir);
-            $installation->write($url);
+
+            $install = $object->data_read($url);
+            if(!$install){
+                $install = new Data();
+            }
+            $list = $install->get('installation');
+            if(empty($list)){
+                $list = [];
+            }
+            $list[] = $installation->data();
+            $install->set('installation', $list);
+            $install->write($url);
         }
         if (empty($id)) {
             $command = 'chown www-data:www-data ' . $object->config('project.dir.host') . ' -R';

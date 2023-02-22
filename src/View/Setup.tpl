@@ -17,7 +17,7 @@ You can decide which environment you will use:
 - production
 
 The development version will have separate files for each prototype.
-The production version will have an "All.prototype.js" with each prototype inside.
+The production version will have a "Core.prototype.js" with each prototype inside.
 The bootstrap.json will be changed accordingly.
 
 You can add your own files to the bootstrap.json file.
@@ -27,7 +27,9 @@ Priya has namespaces available for huge amount of different states, it is endles
 Request content and parse it as such with r3m-io/framework.
 Require Javascript and CSS as a master!
 
-When using a subdomain for the scripts (scripts.example.com for example) you also need to configure cors.
+When using a subdomain for the scripts (scripts.example.com for example) CORS also need to be configured.
+If no CORS is configured, it will be configured automatically.
+
 https://docs.r3m.io/Security/Cors/
 
 {{$hostnames = Priya:Setup:hostnames()}}
