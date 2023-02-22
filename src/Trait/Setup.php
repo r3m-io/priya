@@ -276,6 +276,7 @@ Trait Setup {
                 $node = false;
                 $nr = null;
                 foreach($list as $nr => $record){
+                    d($options);
                     ddd($record);
                     if(
                         property_exists($record, 'hostname') &&
