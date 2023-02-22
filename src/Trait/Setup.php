@@ -299,6 +299,7 @@ Trait Setup {
                     $node->date = $installation->get('date');
                     $node->directory = $installation->get('directory');
                     $list[$nr] = $node;
+                    ddd($list);
                 }
             } else {
                 $list[] = $installation->data();
@@ -313,7 +314,12 @@ Trait Setup {
             $command = 'chown www-data:www-data ' . $object->config('project.dir.data') . ' -R';
             Core::execute($object, $command);
         }
-        echo 'Installation complete: ' . $options['target'] . PHP_EOL;
+        if(!empty($options['update'])){
+            echo 'Update complete: ' . $options['target'] . PHP_EOL;
+        } else {
+            echo 'Installation complete: ' . $options['target'] . PHP_EOL;
+        }
+
     }
 
     /**
