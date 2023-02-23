@@ -455,10 +455,8 @@ Trait Setup {
                 if($boot){
                     foreach($data->get('installation') as $installation){
                         if(property_exists($installation, 'version')){
-                            d($boot);
-                            ddd($installation);
-
                             if(version_compare($boot->get('collect.version'), $installation->version, '!=')){
+                                ddd('yes');
                                 $this->install([
                                     'hostname' => $installation->hostname,
                                     'environment' => $installation->environment,
