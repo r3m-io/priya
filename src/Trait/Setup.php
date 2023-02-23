@@ -59,7 +59,7 @@ Trait Setup {
                     if(
                         property_exists($installation, 'hostname')
                     ){
-                        $installations[] = $installation->hostname;
+                        $installations[] = $installation;
                     }
                 }
             }
