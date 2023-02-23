@@ -210,8 +210,26 @@ Trait Setup {
                 $installation->set('directory', $options['target']);
                 $installation->set('environment', $options['environment']);
             } else {
-                echo 'Already installed...' . PHP_EOL;
-                return;
+                $url =
+                    $object->config('controller.dir.public') .
+                    'Priya' .
+                    $object->config('ds') .
+                    'Bin' .
+                    $object->config('ds') .
+                    'Bootstrap.json'
+                ;
+                $data = $object->data_read($url);
+                if(
+                    $data &&
+                    $data->has('collect.version') &&
+                    version_compare($installation->get('version'), $data->get('collect.version'), '!=')
+                ){
+
+                } else {
+                    echo 'Already installed...' . PHP_EOL;
+                    return;
+                }
+
             }
         } else {
             $installation = new Data();
@@ -375,10 +393,8 @@ Trait Setup {
         } else {
             echo 'Installation complete: ' . $options['target'] . PHP_EOL;
         }
-
     }
-
-
+    
     public function restore($package, $hostname){
         $object = $this->object();
         $package = new Data($package);
