@@ -358,6 +358,18 @@ Trait Setup {
 
     }
 
+
+    public function restore($package){
+        $object = $this->object();
+        $package = new Data($package);
+        if($package->has('installation')) {
+            $data = $object->data_read($package->get('installation'));
+            if ($data) {
+                ddd($data);
+            }
+        }
+    }
+
     /**
      * @throws ObjectException
      * @throws Exception
