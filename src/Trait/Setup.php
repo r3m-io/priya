@@ -151,10 +151,19 @@ Trait Setup {
         if(empty($options['target'])){
             return;
         }
+        $object = $this->object();
+        $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
+        $package = $object->parse_select(
+            $url,
+            'package.r3m-io/priya'
+        );
         if(Dir::is($options['target'])){
             Dir::remove($options['target']);
         }
-        $object = $this->object();
+        if($package){
+            ddd($package);
+        }
+
         $installation = new Data();
         if(
             array_key_exists('hostname', $options) &&
@@ -248,11 +257,7 @@ Trait Setup {
         }
         $installation->set('version', $version);
         File::link($version, $link);
-        $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
-        $package = $object->parse_select(
-            $url,
-            'package.r3m-io/priya'
-        );
+
         if(
             $package
         ){
@@ -322,6 +327,7 @@ Trait Setup {
 
     /**
      * @throws ObjectException
+     * @throws Exception
      */
     public function update($package){
         $object = $this->object();
@@ -336,6 +342,7 @@ Trait Setup {
                 echo $error;
             }
         }
+        $is_update = false;
         if($package->has('installation')){
             $data = $object->data_read($package->get('installation'));
             if($data){
@@ -351,15 +358,20 @@ Trait Setup {
                                     'target' => dir::name($installation->directory) . $boot->get('collect.version') . $object->config('ds'),
                                     'update' => true
                                 ]);
+                                $is_update = true;
                             }
                         }
                     }
                 }
             }
         }
+        if(!$is_update){
+            echo 'No updates found...' . PHP_EOL;
+        }
     }
 
-    public function has_subdomain($hostname=''){
+    public function has_subdomain($hostname=''): bool
+    {
         $explode = explode('.', $hostname, 3);
         if(array_key_exists(2, $explode)){
             return true;
@@ -367,7 +379,8 @@ Trait Setup {
         return false;
     }
 
-    public function extract_dir_subdomain($hostname=''){
+    public function extract_dir_subdomain($hostname=''): string
+    {
         $explode = explode('.', $hostname, 3);
         $count = count($explode);
         if(
@@ -379,7 +392,8 @@ Trait Setup {
         }
     }
 
-    public function extract_dir_domain($hostname=''){
+    public function extract_dir_domain($hostname=''): string
+    {
         $explode = explode('.', $hostname, 3);
         $count = count($explode);
         if(
@@ -398,7 +412,8 @@ Trait Setup {
         }
     }
 
-    public function extract_dir_extension($hostname=''){
+    public function extract_dir_extension($hostname=''): string
+    {
         $explode = explode('.', $hostname, 3);
         $count = count($explode);
         if(
