@@ -151,28 +151,62 @@ Trait Setup {
         if(empty($options['target'])){
             return;
         }
+        if(empty($options['package'])){
+            return;
+        }
         $object = $this->object();
         $url = $object->config('framework.dir.data') . $object->config('dictionary.package') . $object->config('extension.json');
         $package = $object->parse_select(
             $url,
-            'package.r3m-io/priya'
+            'package.' . $options['package']
         );
+
+        $is_found = false;
+        $installation = null;
+        if($package){
+            $install = $object->data_read($url);
+            if($install){
+                foreach($install->get('installation') as $installation){
+                    if(
+                        property_exists($installation, 'hostname') &&
+                        property_exists($installation, 'package') &&
+                        property_exists($installation->package, 'name') &&
+                        $options['hostname'] === $installation->hostname &&
+                        $options['package'] === $installation->package->name
+                    ){
+                        $installation = new Data($installation);
+                        $is_found = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if(
+            $is_found &&
+            $installation
+        ){
+            if($options['environment'] !== $installation->get('environment')){
+                $installation->set('date', date('Y-m-d H:i:s+00:00'));
+                $installation->set('directory', $options['target']);
+                $installation->set('environment', $options['environment']);
+            } else {
+                echo 'Already installed...' . PHP_EOL;
+                return;
+            }
+        } else {
+            $installation = new Data();
+            if(
+                array_key_exists('hostname', $options) &&
+                array_key_exists('environment', $options)
+            ){
+                $installation->set('date', date('Y-m-d H:i:s+00:00'));
+                $installation->set('directory', $options['target']);
+                $installation->set('hostname', $options['hostname']);
+                $installation->set('environment', $options['environment']);
+            }
+        }
         if(Dir::is($options['target'])){
             Dir::remove($options['target']);
-        }
-        if($package){
-            ddd($package);
-        }
-
-        $installation = new Data();
-        if(
-            array_key_exists('hostname', $options) &&
-            array_key_exists('environment', $options)
-        ){
-            $installation->set('date', date('Y-m-d H:i:s+00:00'));
-            $installation->set('directory', $options['target']);
-            $installation->set('hostname', $options['hostname']);
-            $installation->set('environment', $options['environment']);
         }
         if($options['environment'] === Config::MODE_DEVELOPMENT) {
             $dir = new Dir();
@@ -257,7 +291,6 @@ Trait Setup {
         }
         $installation->set('version', $version);
         File::link($version, $link);
-
         if(
             $package
         ){

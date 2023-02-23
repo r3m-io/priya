@@ -69,7 +69,8 @@ Priya:Setup:extract_dir_domain($hostname) +
 Priya:Setup:extract_dir_extension($hostname) +
 '/Public/Js/Priya/' +
 object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'collect.version') +
-'/'
+'/',
+'package' => request(0)
 ])}}
 {{else}}
 {{Priya:Setup:install([
@@ -82,7 +83,8 @@ Priya:Setup:extract_dir_domain($hostname) +
 Priya:Setup:extract_dir_extension($hostname) +
 '/Public/Js/Priya/' +
 object.select(config('controller.dir.public') + 'Priya/Bin/Bootstrap.json', 'collect.version') +
-'/'
+'/',
+'package' => request(0)
 ])}}
 {{/if}}
 {{if(is.empty(config('server.cors')))}}
