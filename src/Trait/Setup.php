@@ -163,8 +163,8 @@ Trait Setup {
 
         $is_found = false;
         $installation = null;
-        if($package){
-            $install = $object->data_read($url);
+        if($package && $package->has('installation')){
+            $install = $object->data_read($package->get('installation'));
             if($install){
                 foreach($install->get('installation') as $installation){
                     if(
