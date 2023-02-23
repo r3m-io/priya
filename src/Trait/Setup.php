@@ -359,13 +359,29 @@ Trait Setup {
     }
 
 
-    public function restore($package){
+    public function restore($package, $hostname){
         $object = $this->object();
         $package = new Data($package);
         if($package->has('installation')) {
             $data = $object->data_read($package->get('installation'));
             if ($data) {
-                ddd($data);
+                $is_found = false;
+                $installation = null;
+                foreach($data->get('installation') as $installation){
+                    if(
+                        property_exists($installation, 'hostname') &&
+                        $installation->hostname === $hostname
+                    ){
+                        $is_found = true;
+                        break;
+                    }
+                }
+                if($is_found && $installation){
+                    if(property_exists($installation, 'restore')){
+                        $to = array_pop($installation->restore);
+                        ddd($to);
+                    }
+                }
             }
         }
     }
