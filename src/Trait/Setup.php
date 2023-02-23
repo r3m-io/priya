@@ -386,8 +386,9 @@ Trait Setup {
             $data = $object->data_read($package->get('installation'));
             if ($data) {
                 $is_found = false;
+                $nr = null;
                 $installation = null;
-                foreach($data->get('installation') as $installation){
+                foreach($data->get('installation') as $nr => $installation){
                     if(
                         property_exists($installation, 'hostname') &&
                         $installation->hostname === $hostname
@@ -396,11 +397,33 @@ Trait Setup {
                         break;
                     }
                 }
-                if($is_found && $installation){
-                    if(property_exists($installation, 'restore')){
-                        $to = array_pop($installation->restore);
-                        ddd($to);
+                if(
+                    $is_found &&
+                    $nr &&
+                    $installation
+                ){
+                    $installation = new Data($installation);
+                    if($installation->has('restore')){
+                        $restore = $installation->get('restore');
+                        $to = array_pop($restore);
+                        if(empty($restore)){
+                            $installation->delete('restore');
+                        } else {
+                            $installation->set('restore', $restore);
+                        }
+                        $installation->set('version', $to);
+                        $installation->set('date', date('Y-m-d H:i:s+00:00'));
+                        $dir = Dir::name($installation->get('directory'));
+                        Dir::change($dir);
+                        $link = 'Latest';
+                        if (File::exist($dir . $link)) {
+                            File::delete($dir . $link);
+                        }
+                        File::link($to, $link);
+                        $installation->set('directory', $dir . $to . $object->config('ds'));
                     }
+                    $data->set('installation.' . $nr, $installation->data());
+                    $data->write($package->get('installation'));
                 }
             }
         }
