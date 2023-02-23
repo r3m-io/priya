@@ -454,13 +454,15 @@ Trait Setup {
                 $boot = $object->data_read($url);
                 if($boot){
                     foreach($data->get('installation') as $installation){
-                        if(property_exists($installation, 'version')){
-                            if(version_compare($boot->get('collect.version'), $installation->version, '!=')){
+                        $installation = new Data($installation);
+                        if($installation->has('version')){
+                            if(version_compare($boot->get('collect.version'), $installation->get('version'), '!=')){
                                 $this->install([
-                                    'hostname' => $installation->hostname,
-                                    'environment' => $installation->environment,
-                                    'target' => dir::name($installation->directory) . $boot->get('collect.version') . $object->config('ds'),
-                                    'update' => true
+                                    'hostname' => $installation->get('hostname'),
+                                    'environment' => $installation->get('environment'),
+                                    'target' => dir::name($installation->get('directory')) . $boot->get('collect.version') . $object->config('ds'),
+                                    'update' => true,
+                                    'package' => $installation->get('package.name')
                                 ]);
                                 $is_update = true;
                             }
