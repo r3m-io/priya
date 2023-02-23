@@ -224,7 +224,7 @@ Trait Setup {
                     $data->has('collect.version') &&
                     version_compare($installation->get('version'), $data->get('collect.version'), '!=')
                 ){
-
+                    $installation->set('directory', $options['target']);
                 } else {
                     echo 'Already installed...' . PHP_EOL;
                     return;
@@ -394,7 +394,7 @@ Trait Setup {
             echo 'Installation complete: ' . $options['target'] . PHP_EOL;
         }
     }
-    
+
     public function restore($package, $hostname){
         $object = $this->object();
         $package = new Data($package);
