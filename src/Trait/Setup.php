@@ -47,6 +47,26 @@ Trait Setup {
         return $result;
     }
 
+    public function installations($package): array
+    {
+        $object = $this->object();
+        $package = new Data($package);
+        $installations = [];
+        if($package->has('installation')) {
+            $data = $object->data_read($package->get('installation'));
+            if ($data) {
+                foreach($data->get('installation') as $installation){
+                    if(
+                        property_exists($installation, 'hostname')
+                    ){
+                        $installations[] = $installation->hostname;
+                    }
+                }
+            }
+        }
+        return $installations;
+    }
+
     public function environments(): array
     {
         return [
