@@ -399,8 +399,8 @@ Trait Setup {
                 }
                 if(
                     $is_found &&
-                    $nr &&
-                    $installation
+                    $nr !== null &&
+                    $installation !== null
                 ){
                     $installation = new Data($installation);
                     if($installation->has('restore')){
