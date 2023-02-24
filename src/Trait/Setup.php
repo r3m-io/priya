@@ -185,7 +185,7 @@ Trait Setup {
         $installation = null;
         if($package && $package->has('installation')){
             $install = $object->data_read($package->get('installation'));
-            if($install){
+            if($install && $install->has('installation')){
                 foreach($install->get('installation') as $installation){
                     if(
                         property_exists($installation, 'hostname') &&
