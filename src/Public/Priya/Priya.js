@@ -105,7 +105,9 @@ var priya;
         }
     }
     var query = src.split('?');
-    query = query[1].split('&');
+    if(query[1]){
+        query = query[1].split('&');
+    }
     var parameters = {};
     for(index=0; index < query.length; index++){
         var parameter = query[index].split('=');
