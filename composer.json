@@ -1,8 +1,8 @@
 {
-    "name" : "r3m-io/priya",
-    "description" : "R3m-io/priya see https://r3m.io for detailed usage",
+    "name" : "r3m_io/priya",
+    "description" : "r3m_io/priya see https://r3m.io for detailed usage",
     "type" : "library",
-    "keywords" : ["javascript", "priya", "r3m", "library"],
+    "keywords" : ["javascript", "priya", "r3m", "library", "r3m.io"],
     "homepage": "https://r3m.io",
     "require" : {
         "r3m/framework": "dev-dev",
