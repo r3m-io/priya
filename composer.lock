@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7dddbc4c45be20faa6f11e48ce1ea5af",
+    "content-hash": "686500411b5a97a2a3eee8118f356dfd",
     "packages": [
         {
             "name": "defuse/php-encryption",
-            "version": "v2.3.1",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/defuse/php-encryption.git",
-                "reference": "77880488b9954b7884c25555c2a0ea9e7053f9d2"
+                "reference": "f53396c2d34225064647a05ca76c1da9d99e5828"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/77880488b9954b7884c25555c2a0ea9e7053f9d2",
-                "reference": "77880488b9954b7884c25555c2a0ea9e7053f9d2",
+                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/f53396c2d34225064647a05ca76c1da9d99e5828",
+                "reference": "f53396c2d34225064647a05ca76c1da9d99e5828",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,8 @@
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4|^5|^6|^7|^8|^9"
+                "phpunit/phpunit": "^5|^6|^7|^8|^9|^10",
+                "yoast/phpunit-polyfills": "^2.0.0"
             },
             "bin": [
                 "bin/generate-defuse-key"
@@ -68,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://github.com/defuse/php-encryption/issues",
-                "source": "https://github.com/defuse/php-encryption/tree/v2.3.1"
+                "source": "https://github.com/defuse/php-encryption/tree/v2.4.0"
             },
-            "time": "2021-04-09T23:57:26+00:00"
+            "time": "2023-06-19T06:10:36+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -226,30 +227,30 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.4",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                    "Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -270,22 +271,69 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
-            "time": "2021-05-03T11:20:27+00:00"
+            "time": "2021-07-14T16:46:02+00:00"
         },
         {
-            "name": "r3m/framework",
-            "version": "dev-dev",
+            "name": "r3m_io/event",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/like-it/r3m-framework.git",
-                "reference": "8dc27e03de7255da4914d2b0b6337539b168fb35"
+                "url": "https://github.com/r3m-io/event.git",
+                "reference": "5c3051e0a459e3893878f6a3e3aa86ab2e343949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/like-it/r3m-framework/zipball/8dc27e03de7255da4914d2b0b6337539b168fb35",
-                "reference": "8dc27e03de7255da4914d2b0b6337539b168fb35",
+                "url": "https://api.github.com/repos/r3m-io/event/zipball/5c3051e0a459e3893878f6a3e3aa86ab2e343949",
+                "reference": "5c3051e0a459e3893878f6a3e3aa86ab2e343949",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-posix": "*",
+                "ext-zlib": "*",
+                "r3m_io/framework": "*"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Remco van der Velde",
+                    "email": "development@universeorange.com"
+                }
+            ],
+            "description": "r3m_io/event see https://r3m.io for detailed usage",
+            "homepage": "https://r3m.io",
+            "keywords": [
+                "event",
+                "framework",
+                "library",
+                "node",
+                "r3m",
+                "r3m.io"
+            ],
+            "support": {
+                "issues": "https://github.com/r3m-io/event/issues",
+                "source": "https://github.com/r3m-io/event/tree/0.0.1"
+            },
+            "time": "2023-08-09T05:22:12+00:00"
+        },
+        {
+            "name": "r3m_io/framework",
+            "version": "0.54.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/r3m-io/framework.git",
+                "reference": "dd2326749c291ada82a9008dafee27b12235bdf4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/r3m-io/framework/zipball/dd2326749c291ada82a9008dafee27b12235bdf4",
+                "reference": "dd2326749c291ada82a9008dafee27b12235bdf4",
                 "shasum": ""
             },
             "require": {
@@ -296,10 +344,13 @@
                 "ext-pcntl": "*",
                 "ext-posix": "*",
                 "ext-readline": "*",
+                "ext-shmop": "*",
                 "ext-zend-opcache": "*",
                 "ext-zip": "*",
                 "monolog/monolog": "^2.2",
-                "php": ">=7.4"
+                "php": ">=8.0",
+                "r3m_io/event": "*",
+                "r3m_io/node": "*"
             },
             "type": "library",
             "autoload": {
@@ -314,7 +365,7 @@
             "authors": [
                 {
                     "name": "Remco van der Velde",
-                    "email": "remco@universeorange.com"
+                    "email": "development@universeorange.com"
                 }
             ],
             "description": "R3M framework see https://r3m.io for detailed usage",
@@ -325,26 +376,75 @@
                 "language",
                 "library",
                 "r3m",
+                "r3m.io",
                 "template"
             ],
             "support": {
-                "issues": "https://github.com/like-it/r3m-framework/issues",
-                "source": "https://github.com/like-it/r3m-framework/tree/dev"
+                "issues": "https://github.com/r3m-io/framework/issues",
+                "source": "https://github.com/r3m-io/framework/tree/0.54.3"
             },
-            "time": "2023-04-02T20:55:14+00:00"
+            "time": "2023-08-09T05:20:27+00:00"
+        },
+        {
+            "name": "r3m_io/node",
+            "version": "0.0.214",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/r3m-io/node.git",
+                "reference": "20466c21e509bff6c14f334077a6ef3d702fb831"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/r3m-io/node/zipball/20466c21e509bff6c14f334077a6ef3d702fb831",
+                "reference": "20466c21e509bff6c14f334077a6ef3d702fb831",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-posix": "*",
+                "ext-zlib": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "R3m\\Io\\Node\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Remco van der Velde",
+                    "email": "development@universeorange.com"
+                }
+            ],
+            "description": "r3m_io/node see https://r3m.io for detailed usage",
+            "homepage": "https://r3m.io",
+            "keywords": [
+                "framework",
+                "library",
+                "node",
+                "r3m",
+                "r3m.io"
+            ],
+            "support": {
+                "issues": "https://github.com/r3m-io/node/issues",
+                "source": "https://github.com/r3m-io/node/tree/0.0.214"
+            },
+            "time": "2023-08-08T17:17:12+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "r3m/framework": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "ext-posix": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
