@@ -5,7 +5,7 @@
     "keywords" : ["javascript", "priya", "r3m", "library", "r3m.io"],
     "homepage": "https://r3m.io",
     "require" : {
-        "r3m_io/framework": "dev-root",
+        "r3m_io/framework": "dev-main",
         "ext-posix": "*"
     },
     "license" : "MIT",

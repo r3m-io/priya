@@ -1,5 +1,4 @@
 _('prototype').select = function(selector){
-    console.log(selector);
     if(_('prototype').is_empty(selector)){
 		console.log('empty selector');
 		return;

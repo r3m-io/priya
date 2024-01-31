@@ -1,0 +1,19 @@
+{
+  "System": {
+    "Route": [
+      {
+        "#class": "System.Route",
+        "name": "r3m-io-cli-priya",
+        "path": "r3m_io/priya/",
+        "controller": "R3m:Io:Priya:Controller:Cli:run",
+        "request": {
+          "language": "en"
+        },
+        "priority": 1001,
+        "method": [
+          "CLI"
+        ]
+      }
+    ]
+  }
+}
